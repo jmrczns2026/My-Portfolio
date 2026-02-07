@@ -1,18 +1,24 @@
+# render.yaml - Laravel + Tailwind (No DB)
 services:
   - type: web
-    name: my-laravel-app
+    name: my-portfolio
     env: php
     plan: free
-    # Root directory: leave empty (project root)
     buildCommand: |
+      # Install PHP dependencies
       composer install --no-dev --optimize-autoloader
+      # Install Node.js dependencies
       npm install
+      # Compile Tailwind CSS for production
       npm run build
     startCommand: php artisan serve --host 0.0.0.0 --port $PORT
     envVars:
+      # Laravel environment
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
         value: false
       - key: APP_KEY
-        value: base64:WwFzR3fumIDc7haWBhwHIT1DJpi1T77gIkY7CDhqSdA=
+        value: base64:loPrpzXPPX7RIFRfUbPRoh5wwXHa2plRQex2A3/nbX4=
+      - key: APP_URL
+        value: https://your-render-url.onrender.com
